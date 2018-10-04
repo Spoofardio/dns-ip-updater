@@ -1,0 +1,20 @@
+version: '2'
+services:
+  dius:
+    image: registry.tunerinc.com/dns-ip-updater:client
+    restart: always
+    container_name: dns-ip-updater-client
+    environment:
+      - KEY=<server_connection_key>
+      - USERNAME=<server_basic-auth_username>
+      - PASSWORD=<server_basic-auth_password>
+    networks:
+      - web
+      - default
+    expose:
+      - "8080"  
+networks:
+  web:
+    external: true
+
+
