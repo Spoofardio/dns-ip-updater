@@ -65,10 +65,10 @@ func ipChange(w http.ResponseWriter, r *http.Request) {
 	hostAddressChanges := "Ip Change from: " + request.OldIP + " --> " + request.NewIP + "\nUpdated Hosts: "
 	dns, err := namecheapClient.DomainsDNSGetHosts(namecheapSLD, namecheapTLD)
 
-	if err != nil { // 500
+	if err != nil { // 502
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Internal Server Error"))
+		w.WriteHeader(http.StatusBadGateway)
+		w.Write([]byte("Namecheap error while reading the DNS records"))
 		return
 	}
 
